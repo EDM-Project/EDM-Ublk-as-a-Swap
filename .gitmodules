@@ -1,0 +1,3 @@
+[submodule "ublk_swap"]
+	path = ublk_swap
+	url = git@github.com:EDM-Project/ubdsrv-as-swap.git
