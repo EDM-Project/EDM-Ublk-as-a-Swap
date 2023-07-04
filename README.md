@@ -1,7 +1,7 @@
 # Ublk-as-a-Swap
 
 Ublk as a Swap is a PoC aimed at implementing userspace remote in-memory swap areas using ublk.
-The main concept is to utilize ublk devices as swap areas, leveraging the scalability of the ublk framework to control swap-in and swap-out requests.
+The main concept is to utilize ublk devices as high-speed swap areas, leveraging the scalability of the ublk framework to control swap-in and swap-out requests.
 
 This project incorporates cgroup V2 to limit memory consumption and enforce processes within the cgroup to utilize the swap area. In the readme file, we explain step-by-step how to get this behavior, while we are providing utils programs for inspecting, debugging, and visualizing what happens behind the scenes. 
 
@@ -11,6 +11,8 @@ While diving into the project, it is advantageous for readers to familiarize the
 <img width="632" alt="image" src="https://github.com/EDM-Project/EDM-Ublk-as-a-Swap/assets/62066172/54248bb0-c772-44eb-a981-de771edb5f35">
 
 
+Our solution adopts a straightforward architecture and leverages the theoretical understanding of kernel swapping mechanism and ublk usage.
+To manage kernel requests efficiently, we divide them into individual pages (consisting of 8 sectors) and transfer them to Redis. This approach enables us to distribute application memory effectively within a cloud environment.
 
 ### Why is there no flush handler?
 
@@ -49,7 +51,7 @@ The page slot that is marked as available within the kernel's internal data stru
     
         ./ublk add -t loop -d 2048 -q 2 -f /home/swap_file_1.img -r tcp://192.168.188.129:6385
 
-In our implementation, the redis connection address is a mandatory parameter.
+In our implementation, the Redis connection address is a mandatory parameter.
 
 5. Activate ublk swap 
 
@@ -80,6 +82,8 @@ In our implementation, the redis connection address is a mandatory parameter.
 where X is the device id.
 
 ## EDM Debugging & Visibility Tools
+
+We provide some tools designed to facilitate the inspection of swap areas and monitor memory usage. By utilizing these tools, users gain insights into the implementation details and underlying processes, enabling them to enhance system performance.
 
 ### Monitor Memory Usage
 A straightforward monitoring program to show real-time memory usage in RAM and swap areas within a cgroup.
