@@ -126,7 +126,9 @@ Note that:
 Python program that parses blktrace output, and provides insights about the read and write operations in the block device. 
 
 usage: 
+
 `blktrace -d /dev/ublkb0 -o - | blkparse -i - > blk_trace_path.txt`
+
 `python monitor_blk_trace.py blk_trace_path.txt`
 
 output example: 
