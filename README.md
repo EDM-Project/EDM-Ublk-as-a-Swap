@@ -51,7 +51,7 @@ The page slot that is marked as available within the kernel's internal data stru
 
 In our implementation, the redis connection address is a mandatory parameter.
 
-5. Make ublk swap 
+5. Activate ublk swap 
 
         mkswap /dev/ublkbX
         swapon /dev/ublkbX -p <priority>
@@ -82,7 +82,7 @@ where X is the device id.
 ## EDM Debugging & Visibility Tools
 
 ### Monitor Memory Usage
-A straightforward monitoring program to show memory usage in RAM and swap areas within a cgroup.
+A straightforward monitoring program to show real-time memory usage in RAM and swap areas within a cgroup.
 usage 
 
     python monitor_memory_usage.py <cgroup_name>
@@ -119,11 +119,12 @@ Note that:
 - PTE-offset and PTE-type are the raw data from the page table.
 - PTE-type is the swap area number, in the example above there are 3 (starting with zero).
 - Redis key calculated according to the way we store the pages in Redis:  $𝑜𝑓𝑓𝑠𝑒𝑡∗(𝑝𝑎𝑔𝑒 𝑠𝑖𝑧𝑒)/(𝑏𝑙𝑜𝑐𝑘 𝑠𝑖𝑧𝑒)$
+- The bits are extracted according to https://docs.kernel.org/admin-guide/mm/pagemap.html
 
 
 ### Monitor blk Trace 
 
-Python program that parses blktrace output, and provides insights about the read and write operations in the block device. 
+Python program that parses blktrace output, and provides insights about the IO operations in the block device.
 
 usage: 
 
