@@ -8,7 +8,7 @@ This project incorporates cgroup V2 to limit memory consumption and enforce proc
 While diving into the project, it is advantageous for readers to familiarize themselves with ubdsrv and ublk-driver. Notably, our implementation builds upon ubdsrv, serving as an academic extension dedicated solely to demonstrating the proof of concept.
 
 ### High-Level Architecture
-<img width="758" alt="image" src="https://github.com/EDM-Project/EDM-Ublk-as-a-Swap/assets/62066172/f934bb5c-c962-46f0-b179-50fddbc65ae7">
+<img width="632" alt="image" src="https://github.com/EDM-Project/EDM-Ublk-as-a-Swap/assets/62066172/54248bb0-c772-44eb-a981-de771edb5f35">
 
 
 
