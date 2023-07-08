@@ -32,7 +32,8 @@ with open(blk_trace_path, 'r') as file, open(output_filename, 'w') as output_fil
     for line in file:
         fields = line.split()
         if len(fields) == 11:
-            output_file.write(f"{fields[3]} {fields[6]} {fields[9]}\n")
+            if fields[5] in ['D']:
+                output_file.write(f"{fields[3]} {fields[6]} {fields[9]}\n")
 
 # Initialize empty lists to store the data
 timestamps = []
@@ -75,7 +76,7 @@ plt.title('Block Trace - Ublk as Swap')
 # Add a legend
 plt.legend()
 
-
+plt.show()
 
 # Initialize dictionaries to store the count of read and write operations for each offset value
 read_counts = {}
@@ -107,7 +108,6 @@ for offset in sorted(write_counts.keys()):
     write_table_data.append([offset, count])
 
 
-
 # Print the results as tables
 print('Read operations:')
 print(tabulate(read_table_data, headers=['Offset', 'Count'], tablefmt='grid'))
@@ -117,11 +117,27 @@ print('Write operations:')
 print(tabulate(write_table_data, headers=['Offset', 'Count'], tablefmt='grid'))
 
 
+# Create separate bar graphs for read and write operations
+plt.subplot(2, 1, 1)
+plt.bar(read_counts.keys(), read_counts.values(), color='red')
+plt.xlabel('Offset')
+plt.ylabel('Count')
+plt.title('Read Operations')
 
+plt.subplot(2, 1, 2)
+plt.bar(write_counts.keys(), write_counts.values(), color='green', width=2.5)
+plt.xlabel('Offset')
+plt.ylabel('Count')
+plt.title('Write Operations')
 
+# Adjust the spacing between subplots
+plt.tight_layout()
+
+# Display the graphs
+#plt.show()
 
 
 
 # Display the graph
-plt.show()
+#plt.show()
 
