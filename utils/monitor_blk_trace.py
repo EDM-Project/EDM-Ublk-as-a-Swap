@@ -76,7 +76,7 @@ plt.title('Block Trace - Ublk as Swap')
 # Add a legend
 plt.legend()
 
-
+plt.show()
 
 # Initialize dictionaries to store the count of read and write operations for each offset value
 read_counts = {}
@@ -134,7 +134,7 @@ plt.title('Write Operations')
 plt.tight_layout()
 
 # Display the graphs
-plt.show()
+#plt.show()
 
 
 
